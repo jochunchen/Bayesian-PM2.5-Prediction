@@ -1,4 +1,4 @@
-# Bayesian-PM2.5-Prediction
+# Bayesian PM2.5 Prediction
 This repository contains the code and analysis for predicting PM2.5 levels using a Bayesian approach. The project uses a hierarchical Bayesian linear regression model to account for regional differences in air quality across Taiwan. 🇹🇼 The analysis is structured to first preprocess the data, then explore the relationships between different pollutants and PM2.5, and finally build and evaluate a predictive model.
 
 ## Methodology
