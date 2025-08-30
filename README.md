@@ -1,1 +1,33 @@
 # Bayesian-PM2.5-Prediction
+This repository contains the code and analysis for predicting PM2.5 levels using a Bayesian approach. The project uses a hierarchical Bayesian linear regression model to account for regional differences in air quality across Taiwan. 🇹🇼 The analysis is structured to first preprocess the data, then explore the relationships between different pollutants and PM2.5, and finally build and evaluate a predictive model.
+
+## Project Structure
+- data/: Contains the raw and processed air quality datasets.
+- notebooks/: Includes the Jupyter notebooks for data exploration, model building, and evaluation.
+- src/: Holds the Python scripts for data preprocessing and modeling.
+- results/: Stores model outputs, including traces and summary statistics.
+- submission/: Contains the final predicted PM2.5 values in a CSV format ready for submission.
+
+## Methodology
+The core of this project is a Bayesian hierarchical linear regression model built with PyMC3. The key steps are:
+### 1. Data Preprocessing: 
+Raw air quality data from 2021 is read, merged, and cleaned. This involves handling missing values, converting categorical features (like county and pollutant names) into numerical representations, and resampling the data to a regular interval (every 4 hours, every 4 days) to balance the dataset.
+
+### 2. Exploratory Data Analysis (EDA): 
+A correlation heatmap and various scatter plots are generated to identify the most influential variables on PM2.5 levels. The data is also partitioned into two regions—Western and Eastern Taiwan—based on observed PM2.5 distributions.
+
+### 3. Model Building:
+- Non-Hierarchical Model:
+  A baseline multivariate linear regression model is established.
+- Hierarchical Model:
+  The main model is a hierarchical linear regression that allows the intercept and coefficients to vary by region, capturing the unique air quality dynamics of Western vs. Eastern Taiwan. This approach is more robust as it pools information across regions while still allowing for individual differences.
+
+### 4. Model Evaluation: 
+The models are evaluated using several Bayesian metrics:
+
+- Trace Plots: Visualizing the posterior distributions of model parameters to check for convergence.
+- Posterior Predictive Checks (PPC): Comparing the model's predicted data distribution to the actual data distribution to assess model fit.
+- LOO-CV and WAIC: Using Leave-One-Out Cross-Validation (LOO-CV) and Widely Applicable Information Criterion (WAIC) to compare the predictive performance of the non-hierarchical and hierarchical models.
+
+### 5. Prediction: 
+The superior hierarchical model is used to predict PM2.5 levels for a specific time period. The predictions are then written to a submission CSV file.
